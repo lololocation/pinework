@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PineWork</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+      
+      /* 👇👇👇 新增的核心代码 START 👇👇👇 */
+      /* 强制撑满窗口，去除白边，允许背景透明 */
+      html, body, #root {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* 禁止滚动条 */
+        background-color: transparent; /* 关键：让 Electron 窗口可以透出圆角 */
+      }
+      /* 👆👆👆 新增的核心代码 END 👆👆👆 */
+
+      body {
+        font-family: 'Nunito', sans-serif;
+        /* overflow: hidden; <--- 这行我合并到上面去了 */
+      }
+
+      /* Custom Scrollbar for inner containers */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgb(var(--color-primary-600) / 0.4);
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgb(var(--color-primary-600) / 0.6);
+      }
+      
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .dark .glass-panel {
+        background: rgba(20, 30, 20, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Default variables (Pine) to prevent flash of unstyled content */
+      :root {
+        --color-primary-50: 240 253 244;
+        --color-primary-100: 220 252 231;
+        --color-primary-200: 187 247 208;
+        --color-primary-300: 134 239 172;
+        --color-primary-400: 51 138 78;
+        --color-primary-500: 38 120 64;
+        --color-primary-600: 30 99 52;
+        --color-primary-700: 24 80 43;
+        --color-primary-800: 20 64 36;
+        --color-primary-900: 17 51 30;
+        --color-primary-950: 8 28 15;
+      }
+      /* 👇👇👇 新增：窗口拖拽区域 👇👇👇 */
+.drag-region {
+  -webkit-app-region: drag; /* 允许拖动窗口 */
+}
+.no-drag {
+  -webkit-app-region: no-drag; /* 按钮区域禁止拖动（否则点不了按钮） */
+  cursor: pointer;
+}
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: 'rgb(var(--color-primary-50) / <alpha-value>)',
+                100: 'rgb(var(--color-primary-100) / <alpha-value>)',
+                200: 'rgb(var(--color-primary-200) / <alpha-value>)',
+                300: 'rgb(var(--color-primary-300) / <alpha-value>)',
+                400: 'rgb(var(--color-primary-400) / <alpha-value>)',
+                500: 'rgb(var(--color-primary-500) / <alpha-value>)',
+                600: 'rgb(var(--color-primary-600) / <alpha-value>)',
+                700: 'rgb(var(--color-primary-700) / <alpha-value>)',
+                800: 'rgb(var(--color-primary-800) / <alpha-value>)',
+                900: 'rgb(var(--color-primary-900) / <alpha-value>)',
+                950: 'rgb(var(--color-primary-950) / <alpha-value>)',
+              }
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.1/",
+    "react/": "https://esm.sh/react@^19.2.1/",
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

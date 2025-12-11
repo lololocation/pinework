@@ -1,0 +1,5 @@
+{
+  "name": "PineWork - Zen Salary Tracker",
+  "description": "A privacy-focused, lightweight work companion. Track your real-time earnings, manage daily tasks, and enjoy a zen, pine-green aesthetic. Data is stored locally and obfuscated.",
+  "requestFramePermissions": []
+}
