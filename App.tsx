@@ -536,13 +536,16 @@ function App() {
 // MINI MODE RENDER
     if (isMiniMode) {
         return (
-            <div className="relative w-full h-full flex items-center justify-center bg-transparent overflow-visible">
-                {/* Added noise texture for mini mode too */}
-                <div className="bg-noise"></div>
-                {/* Atmosphere Overlay for Mini Mode */}
-                <div className="absolute inset-0 pointer-events-none transition-colors duration-[3000ms]" style={getAtmosphereStyle()}></div>
+            <div className="relative w-full h-full flex items-center justify-center bg-transparent">
+                {/* Removed outer background elements to prevent rectangular box shadow */}
+                {/* Removed overflow-hidden from outer container to prevent clipping of CSS shadows */}
 
-                <div className="relative overflow-hidden glass-panel p-4 pr-6 rounded-full shadow-2xl flex items-center gap-6 border border-white/50 bg-white/90 backdrop-blur-xl hover:scale-105 transition-transform duration-300 drag-region group z-10">
+                {/* Removed shadow-2xl and hover:scale-105 to eliminate external artifacts */}
+                <div className="relative overflow-hidden glass-panel p-4 pr-6 rounded-full flex items-center gap-6 border border-white/60 bg-white/90 backdrop-blur-xl transition-transform duration-300 drag-region group z-10">
+                    {/* Inner Backgrounds: Clipped to rounded-full */}
+                    <div className="bg-noise !absolute !inset-0"></div>
+                    <div className="absolute inset-0 pointer-events-none transition-colors duration-[3000ms]" style={getAtmosphereStyle()}></div>
+
                     <div
                         className="absolute inset-0 bg-primary-500/10 z-0 transition-all duration-1000 linear"
                         style={{ width: `${progressPercent}%` }}
